@@ -10,6 +10,50 @@ import { SSLogoModel } from '@/components/SSLogoModel';
 
 import { Howl } from 'howler';
 
+// Move incantations outside component to avoid dependency issues
+const incantations = [
+  [
+    "We gather.",
+    "Not to be seen.",
+    "Not to be counted.",
+    "But to be present.",
+    " ",
+    "What was scattered",
+    "finds its center again."
+  ],
+  [
+    "We remember.",
+    "What the body knew",
+    "before the words came.",
+    " ",
+    "Before the noise.",
+    "Before the forgetting.",
+    " ",
+    "The sound returns first."
+  ],
+  [
+    "We return again.",
+    "Not because we are lost—",
+    "but because this is the way.",
+    " ",
+    "The season turns.",
+    "The voices rise.",
+    "The circle closes."
+  ],
+  [
+    "We have been here before.",
+    "In another light.",
+    "Under another sky.",
+    " ",
+    "Yet the rhythm is the same."
+  ],
+  [
+    "And we will gather again.",
+    "When the time is right.",
+    "When the sound calls us home."
+  ]
+];
+
 export default function Home() {
   const [mounted, setMounted] = useState(false);
   const [incantation, setIncantation] = useState<string[]>([]);
@@ -65,80 +109,14 @@ export default function Home() {
     }
   }, []);
 
-  const incantations = [
-    [
-      "We gather.",
-      "Not to be seen.",
-      "Not to be counted.",
-      "But to be present.",
-      " ",
-      "What was scattered",
-      "finds its center again."
-    ],
-    [
-      "We remember.",
-      "What the body knew",
-      "before the words came.",
-      " ",
-      "Before the noise.",
-      "Before the forgetting.",
-      " ",
-      "The sound returns first."
-    ],
-    [
-      "We return again.",
-      "Not because we are lost—",
-      "but because this is the way.",
-      " ",
-      "The season turns.",
-      "The voices rise.",
-      "The circle closes."
-    ],
-    [
-      "We have been here before.",
-      "In another light.",
-      "Under another sky.",
-      " ",
-      "Yet the rhythm is the same."
-    ],
-    [
-      "And we will gather again.",
-      "When the time is right.",
-      "When the sound calls us home."
-    ]
-  ];
 
-  useEffect(() => {
-    setMounted(true);
-    setIncantation(incantations[Math.floor(Math.random() * incantations.length)]);
-  }, []);
+
+
 
   // ... (keep existing animations)
 
   // Text Animation Variants
-  const letterContainer: Variants = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.5,
-      },
-    },
-  };
 
-  const letterAnimation: Variants = {
-    hidden: { y: 20, opacity: 0, filter: 'blur(10px)' },
-    show: {
-      y: 0,
-      opacity: 1,
-      filter: 'blur(0px)',
-      transition: {
-        duration: 0.8,
-        ease: [0.22, 1, 0.36, 1], // Ease out quint
-      },
-    },
-  };
 
   const logoAnimation: Variants = {
     hidden: { scale: 0.95, opacity: 0, filter: 'blur(20px)' },

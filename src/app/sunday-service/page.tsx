@@ -5,16 +5,14 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 
 export default function SundayService() {
-  const [isPlaying, setIsPlaying] = useState(false);
+
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  const togglePlay = () => {
-    setIsPlaying(!isPlaying);
-  };
+
 
   if (!mounted) return null;
 
