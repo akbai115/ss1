@@ -75,10 +75,8 @@ export default function Home() {
     setIncantation(selectedIncantation);
 
     // Initial interaction listener (one-time) to unlock audio context if needed
-    const handleInteraction = () => {
-      playThud();
-      window.removeEventListener('click', handleInteraction);
-    };
+    // Removed unused handleInteraction to fix build error.
+
     window.addEventListener('click', () => playThud()); // Keep global click feedback
 
     // Sequence the lines with audio impact
@@ -107,6 +105,7 @@ export default function Home() {
       clearTimeout(timeoutId);
       window.removeEventListener('click', () => playThud());
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 
@@ -216,9 +215,15 @@ export default function Home() {
         className="fixed bottom-16 left-6 z-50 font-mono text-[10px] md:text-xs text-neutral-400 hidden md:block mix-blend-difference"
       >
         {incantation.map((line, i) => (
-          <div key={i} className="leading-relaxed tracking-wider uppercase opacity-80">
+          <motion.div
+            key={i}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: i <= visibleLineIndex ? 1 : 0 }}
+            transition={{ duration: 0.5 }}
+            className="leading-relaxed tracking-wider uppercase opacity-80"
+          >
             {line === " " ? <br /> : line}
-          </div>
+          </motion.div>
         ))}
       </motion.div>
 
