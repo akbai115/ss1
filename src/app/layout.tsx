@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   description: "SUNDAY SERVICE EXPERIENCE",
   icons: {
     icon: [
-      { url: '/favicon.svg', type: 'image/svg+xml' }
+      { url: '/logo.png', type: 'image/png' }
     ]
   }
 };

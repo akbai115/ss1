@@ -1,75 +1,93 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 
 export default function SundayService() {
-  const [showMessage, setShowMessage] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
-  const handlePlayClick = () => {
-    setShowMessage(true);
-    setTimeout(() => {
-      setShowMessage(false);
-    }, 3000);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const togglePlay = () => {
+    setIsPlaying(!isPlaying);
   };
 
+  if (!mounted) return null;
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-6 relative">
-      {/* Version number */}
-      <div className="absolute top-6 left-6 version">
-        3.16.25
-      </div>
-      
-      {/* Main content */}
-      <div className="flex flex-col items-center justify-center gap-8 md:gap-12">
-        {/* Headline text */}
-        <div className="text-center">
-          <h1 className="headline text-[5rem] md:text-[11rem] font-bold leading-none">SUNDAY</h1>
-          <h1 className="headline text-[5rem] md:text-[11rem] font-bold leading-none">SERVICE</h1>
-          <h2 className="headline text-[2rem] md:text-[3rem] mt-4">EXPERIENCE</h2>
-        </div>
-        
-        {/* Live status */}
-        <div className="flex flex-col md:flex-row items-center gap-4 mt-4">
-          <div className="headline text-xl md:text-2xl">LIVE SOON</div>
-          <div className="border border-[#FF0000] rounded-full px-6 py-2 text-white font-mono">
-            SUNDAYSERVICE.NET
-          </div>
-        </div>
-        
-        {/* Logo */}
-        <div className="w-32 h-32 md:w-48 md:h-48 transition-opacity duration-300 hover:opacity-90 mt-4 flex items-center justify-center">
-          <img 
-            src="/logo.png" 
-            alt="Sunday Service Logo" 
-            className="max-w-full max-h-full object-contain"
-          />
-        </div>
-        
-        {/* Play button */}
-        <div className="relative">
-          <button 
-            onClick={handlePlayClick}
-            className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#FF0000] flex items-center justify-center transition-all duration-300 hover:scale-105 active:scale-95"
+    <main className="flex min-h-screen flex-col items-center justify-center relative overflow-hidden bg-black text-white selection:bg-neutral-800">
+      <div className="bg-grain opacity-[0.03] pointer-events-none fixed inset-0 z-50"></div>
+
+      {/* Background Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-red-900/5 blur-[150px] rounded-full pointer-events-none"></div>
+
+      <div className="z-10 flex flex-col items-center w-full max-w-4xl px-6">
+        {/* Header */}
+        <motion.div
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 1 }}
+          className="text-center mb-16 space-y-2"
+        >
+          <div className="font-mono text-[10px] tracking-[0.4em] text-neutral-500 uppercase">Live Transmission</div>
+          <h1 className="text-4xl md:text-6xl font-black tracking-tight font-mono">SUNDAY SERVICE</h1>
+        </motion.div>
+
+        {/* Central Player Interface */}
+        <motion.div
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="w-full max-w-lg aspect-square border border-white/10 bg-black/50 backdrop-blur-sm flex flex-col items-center justify-center gap-8 relative p-8 group"
+        >
+          {/* Spinning Ring Animation - Static in offline mode */}
+          <div className="absolute inset-0 border border-dotted border-white/5 rounded-full m-8 opacity-20"></div>
+
+          {/* Logo */}
+          <motion.div
+            className="w-32 h-32 relative"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
-              <path d="M8 5v14l11-7z" />
-            </svg>
-          </button>
-          
-          {/* Not live message */}
-          {showMessage && (
-            <div className="absolute top-full mt-4 left-1/2 -translate-x-1/2 bg-black border border-[#FF0000] px-6 py-3 text-white font-mono animate-fade-in">
-              NOT LIVE YET
+            <img
+              src="/logo.png"
+              alt="Sunday Service"
+              className="w-full h-full object-contain brightness-0 invert drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] opacity-50"
+            />
+          </motion.div>
+
+          {/* Status Text/Controls */}
+          <div className="text-center space-y-4 relative z-10 control-group">
+            <div className="font-mono text-2xl font-bold tracking-widest text-neutral-600">
+              --:--:--
             </div>
-          )}
-        </div>
-        
-        {/* Back link */}
-        <Link href="/" className="text-white/50 font-mono text-sm hover:text-white transition-colors duration-300 mt-8">
-          BACK
-        </Link>
+
+            <div
+              className="px-8 py-3 border border-white/5 bg-white/5 text-neutral-500 font-mono text-xs uppercase tracking-widest cursor-not-allowed select-none"
+            >
+              SIGNAL OFFLINE
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Footer Info */}
+        <motion.div
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 1, delay: 0.4 }}
+          className="mt-16 text-center space-y-2"
+        >
+          <p className="font-mono text-xs text-neutral-500 uppercase tracking-widest">Next Service Date:</p>
+          <div className="font-mono text-xl tracking-widest text-[#FF0000]">02.08.26</div>
+        </motion.div>
       </div>
+
+      {/* Navigation */}
+      <Link href="/" className="fixed bottom-8 left-1/2 -translate-x-1/2 text-neutral-600 hover:text-white font-mono text-[10px] tracking-[0.3em] uppercase transition-colors duration-300">
+        RETURN
+      </Link>
     </main>
   );
 } 

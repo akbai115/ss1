@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #000000;
+  --background: #050505;
   --foreground: #ffffff;
   --accent: #FF0000;
   --accent-hover: #FF1111;
@@ -18,8 +18,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #000000;
   }
 }
 
@@ -27,18 +26,33 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+@layer utilities {
+  .bg-grain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+
+  .animate-pulse-slow {
+    animation: pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
 }
 
 @layer components {
   .btn {
-    @apply bg-[#FF0000] text-white tracking-[0.15em] px-8 py-3 transition-all duration-300 hover:scale-105 active:scale-95;
+    @apply bg-accent text-white tracking-[0.15em] px-8 py-3 transition-all duration-300 hover:scale-105 active:scale-95 uppercase font-bold;
   }
-  
+
   .version {
-    @apply font-mono text-white/50 text-sm;
-  }
-  
-  .headline {
-    @apply font-sans tracking-[0.15em] text-[#FF0000] transition-all duration-300 hover:text-[#FF1111];
+    @apply font-mono text-white/30 text-xs tracking-widest;
   }
 }
