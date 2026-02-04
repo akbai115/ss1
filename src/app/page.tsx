@@ -135,14 +135,15 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center relative overflow-hidden bg-black selection:bg-neutral-800 selection:text-white">
-      {/* Intro Video Overlay */}
+      {/* Background Video Layer - Plays behind assets and fades out */}
       <AnimatePresence>
         {showVideo && (
           <motion.div
-            initial={{ opacity: 1 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 2, ease: "easeInOut" }}
-            className="fixed inset-0 z-[100] bg-black flex items-center justify-center pointer-events-none"
+            className="fixed inset-0 z-0 flex items-center justify-center pointer-events-none"
           >
             <video
               ref={videoRef}
@@ -151,24 +152,18 @@ export default function Home() {
               muted
               playsInline
               onEnded={() => setShowVideo(false)}
-              className="w-full h-full object-cover"
+              onError={() => setShowVideo(false)} // Safety: hide if video fails
+              className="w-full h-full object-cover opacity-60" // Slightly dimmed to not overpower UI
             />
-            {/* Fallback to close video if it doesn't end for some reason */}
-            <button
-              onClick={() => setShowVideo(false)}
-              className="absolute bottom-10 right-10 text-white/20 font-mono text-[10px] uppercase tracking-widest pointer-events-auto"
-            >
-              Skip
-            </button>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Ambient Background Effects - Reduced intensity */}
+      {/* Ambient Background Effects */}
       <div className="bg-grain opacity-[0.03] pointer-events-none fixed inset-0 z-50"></div>
 
       {/* 3D Background Layer */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-10">
         <Canvas camera={{ position: [0, 0, 8], fov: 35 }}>
           <ambientLight intensity={1.5} />
           <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={2} />
