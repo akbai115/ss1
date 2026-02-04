@@ -237,7 +237,7 @@ export default function Home() {
             duration: 20
           }}
         >
-          {Array(10).fill("SUNDAY SERVICE IS BACK  •  GOD IS THE GREATEST  •  NO MORE MEDS  •  THE VISION IS CLEAR  •  FREEDOM  •  ").map((text, i) => (
+          {Array(10).fill("SUNDAY SERVICE IS BACK  •  GOD IS THE GREATEST  •  THE VISION IS CLEAR  •  FREEDOM  •  ").map((text, i) => (
             <span key={i} className="text-white/40 font-mono text-xs tracking-[0.3em] uppercase font-bold">
               {text}
             </span>
