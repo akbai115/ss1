@@ -41,7 +41,7 @@ export default function SundayService() {
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="w-full max-w-lg aspect-square border border-white/10 bg-black/50 backdrop-blur-sm flex flex-col items-center justify-center gap-8 relative p-8 group"
+          className="w-full max-w-lg aspect-square border border-white/10 bg-black/50 backdrop-blur-sm flex flex-col items-center justify-center gap-6 md:gap-8 relative p-4 md:p-8 group"
         >
           {/* Spinning Ring Animation - Static in offline mode */}
           <div className="absolute inset-0 border border-dotted border-white/5 rounded-full m-8 opacity-20"></div>

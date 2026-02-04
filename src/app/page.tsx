@@ -154,7 +154,7 @@ export default function Home() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 1 }}
-        className="absolute top-8 left-8 version mix-blend-difference z-40 text-neutral-500"
+        className="absolute top-6 left-6 md:top-8 md:left-8 version mix-blend-difference z-40 text-neutral-500 text-[10px] md:text-xs"
       >
         2.8.26
       </motion.div>
@@ -164,7 +164,7 @@ export default function Home() {
         href="https://pump.fun/profile/sundayservice"
         target="_blank"
         rel="noopener noreferrer"
-        className="absolute top-8 left-1/2 -translate-x-1/2 font-mono text-[#FF0000] hover:text-white transition-colors duration-300 tracking-[0.2em] text-sm z-50 font-black uppercase"
+        className="absolute top-6 md:top-8 left-1/2 -translate-x-1/2 font-mono text-[#FF0000] hover:text-white transition-colors duration-300 tracking-[0.2em] text-xs md:text-sm z-50 font-black uppercase whitespace-nowrap"
       >
         PUMP.FUN
       </a>
@@ -186,7 +186,7 @@ export default function Home() {
                 scale: 1.02,
                 transition: { duration: 0.5, ease: "easeOut" }
               }}
-              className="w-48 h-48 md:w-80 md:h-80 relative"
+              className="w-64 h-64 md:w-80 md:h-80 relative"
             >
               <div className="w-full h-full relative">
                 <Canvas camera={{ position: [0, 0, 4], fov: 45 }}>
@@ -211,7 +211,7 @@ export default function Home() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 3, duration: 2 }}
-        className="fixed bottom-16 left-6 z-50 font-mono text-[10px] md:text-xs text-neutral-400 hidden md:block mix-blend-difference"
+        className="fixed bottom-24 left-0 w-full md:w-auto md:left-6 md:bottom-16 text-center md:text-left z-50 font-mono text-[10px] md:text-xs text-neutral-400 mix-blend-difference pointer-events-none"
       >
         {incantation.map((line, i) => (
           <motion.div
