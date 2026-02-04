@@ -183,6 +183,9 @@ export default function Home() {
         >
           CA: BZ288EdWizNspJMPeG1nnpRxoY9gKMg1dNSy9F4Mpump
         </button>
+        <div className="font-mono text-[#FF0000]/60 text-[9px] md:text-[10px] tracking-widest uppercase font-medium text-center">
+          $SSERVICE the official passage for sunday service
+        </div>
       </div>
 
       {/* Main Content Container */}
