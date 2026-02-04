@@ -139,10 +139,15 @@ export default function Home() {
       {/* 3D Background Layer */}
       <div className="absolute inset-0 z-0">
         <Canvas camera={{ position: [0, 0, 8], fov: 35 }}>
-          <ambientLight intensity={1.5} />
-          <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={2} />
+          <ambientLight intensity={2} />
+          <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={3} />
           <pointLight position={[-10, -10, -10]} intensity={2} />
-          <Suspense fallback={null}>
+          <Suspense fallback={
+            <mesh>
+              <sphereGeometry args={[0.1, 16, 16]} />
+              <meshBasicMaterial color="#FF0000" />
+            </mesh>
+          }>
             <HoodModel />
             <Environment preset="studio" />
           </Suspense>
@@ -159,18 +164,29 @@ export default function Home() {
         2.8.26
       </motion.div>
 
-      {/* External Link - Centered and always visible */}
-      <a
-        href="https://pump.fun/profile/sundayservice"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="absolute top-6 md:top-8 left-1/2 -translate-x-1/2 font-mono text-[#FF0000] hover:text-white transition-colors duration-300 tracking-[0.2em] text-xs md:text-sm z-50 font-black uppercase whitespace-nowrap"
-      >
-        PUMP.FUN
-      </a>
+      {/* Header Links */}
+      <div className="absolute top-6 md:top-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-50">
+        <a
+          href="https://pump.fun/profile/sundayservice"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-mono text-[#FF0000] hover:text-white transition-colors duration-300 tracking-[0.2em] text-xs md:text-sm font-black uppercase whitespace-nowrap"
+        >
+          PUMP.FUN
+        </a>
+        <button
+          onClick={() => {
+            navigator.clipboard.writeText('BZ288EdWizNspJMPeG1nnpRxoY9gKMg1dNSy9F4Mpump');
+            // Optional: add a toast or feedback here
+          }}
+          className="font-mono text-[#FF0000]/80 hover:text-[#FF0000] transition-colors duration-300 tracking-wider text-[10px] md:text-xs font-bold uppercase cursor-pointer select-all"
+        >
+          CA: BZ288EdWizNspJMPeG1nnpRxoY9gKMg1dNSy9F4Mpump
+        </button>
+      </div>
 
       {/* Main Content Container */}
-      <div className="flex flex-col md:flex-row items-center justify-center w-full max-w-7xl px-4 z-10 relative gap-12 md:gap-0">
+      <div className="flex flex-col md:flex-row items-center justify-center w-full max-w-7xl px-4 z-20 relative gap-12 md:gap-0">
 
         {/* Spacer for balance - Left Side */}
         <div className="flex-1 hidden md:block order-1" />
@@ -190,10 +206,15 @@ export default function Home() {
             >
               <div className="w-full h-full relative">
                 <Canvas camera={{ position: [0, 0, 4], fov: 45 }}>
-                  <ambientLight intensity={2} />
-                  <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={3} />
+                  <ambientLight intensity={3} />
+                  <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={5} />
                   <Environment preset="studio" />
-                  <Suspense fallback={null}>
+                  <Suspense fallback={
+                    <mesh>
+                      <sphereGeometry args={[0.05, 16, 16]} />
+                      <meshBasicMaterial color="#FF0000" />
+                    </mesh>
+                  }>
                     <SSLogoModel />
                   </Suspense>
                 </Canvas>
