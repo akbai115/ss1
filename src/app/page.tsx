@@ -1,8 +1,8 @@
 'use client';
 
-import { motion, Variants } from 'framer-motion';
+import { motion, Variants, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import { useState, useEffect, Suspense } from 'react';
+import { useState, useEffect, Suspense, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Environment } from '@react-three/drei';
 import { HoodModel } from '@/components/HoodModel';
@@ -58,6 +58,8 @@ export default function Home() {
   const [mounted, setMounted] = useState(false);
   const [incantation, setIncantation] = useState<string[]>([]);
   const [visibleLineIndex, setVisibleLineIndex] = useState(-1);
+  const [showVideo, setShowVideo] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   // Setup Audio
   const playThud = () => {
@@ -133,6 +135,35 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center relative overflow-hidden bg-black selection:bg-neutral-800 selection:text-white">
+      {/* Intro Video Overlay */}
+      <AnimatePresence>
+        {showVideo && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 2, ease: "easeInOut" }}
+            className="fixed inset-0 z-[100] bg-black flex items-center justify-center pointer-events-none"
+          >
+            <video
+              ref={videoRef}
+              src="/live.mp4"
+              autoPlay
+              muted
+              playsInline
+              onEnded={() => setShowVideo(false)}
+              className="w-full h-full object-cover"
+            />
+            {/* Fallback to close video if it doesn't end for some reason */}
+            <button
+              onClick={() => setShowVideo(false)}
+              className="absolute bottom-10 right-10 text-white/20 font-mono text-[10px] uppercase tracking-widest pointer-events-auto"
+            >
+              Skip
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Ambient Background Effects - Reduced intensity */}
       <div className="bg-grain opacity-[0.03] pointer-events-none fixed inset-0 z-50"></div>
 
