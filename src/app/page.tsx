@@ -105,7 +105,6 @@ export default function Home() {
       clearTimeout(timeoutId);
       window.removeEventListener('click', () => playThud());
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 

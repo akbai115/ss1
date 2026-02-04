@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 export default function SundayService() {
@@ -49,10 +50,11 @@ export default function SundayService() {
           <motion.div
             className="w-32 h-32 relative"
           >
-            <img
+            <Image
               src="/logo.png"
               alt="Sunday Service"
-              className="w-full h-full object-contain brightness-0 invert drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] opacity-50"
+              fill
+              className="object-contain brightness-0 invert drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] opacity-50"
             />
           </motion.div>
 
