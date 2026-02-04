@@ -224,6 +224,15 @@ export default function Home() {
               </div>
             </motion.div>
           </Link>
+          {/* Subtitle text under Logo */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 2.5, duration: 1.5, ease: "easeOut" }}
+            className="text-white font-mono text-[10px] md:text-xs tracking-[0.4em] uppercase font-light text-center mt-4 opacity-50 hover:opacity-100 transition-opacity duration-500"
+          >
+            FREQUENCY KNOWS FREEDOM ALREADY
+          </motion.div>
         </div>
 
         {/* Spacer for balance - Order 3 ensures it stays on the right */}
